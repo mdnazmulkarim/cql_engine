@@ -12,7 +12,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.net.URL;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -61,16 +60,6 @@ public class FileBasedFhirProvider extends FhirDataProviderStu3 {
         this.path = Paths.get(path);
         this.terminologyProvider = endpoint == null ? new FhirTerminologyProvider().setEndpoint("http://measure.eval.kanvix.com/cqf-ruler/baseDstu3", false)
                 : new FhirTerminologyProvider().setEndpoint(endpoint, false);
-    }
-
-    private URL pathToModelJar;
-    public void setPathToModelJar(URL pathToModelJar) {
-        this.pathToModelJar = pathToModelJar;
-    }
-
-    public FileBasedFhirProvider withPathToModelJar(URL pathToModelJar) {
-        setPathToModelJar(pathToModelJar);
-        return this;
     }
 
     @Override
@@ -175,7 +164,7 @@ public class FileBasedFhirProvider extends FhirDataProviderStu3 {
                     if (date != null && InEvaluator.in(date, expanded, null)) {
                         results.add(res);
                     }
-                    else if (dateInterval != null && (Boolean) IncludesEvaluator.includes(expanded, dateInterval, "day")) {
+                    else if (dateInterval != null && IncludesEvaluator.includes(expanded, dateInterval, "day")) {
                         results.add(res);
                     }
                     else {
@@ -197,7 +186,7 @@ public class FileBasedFhirProvider extends FhirDataProviderStu3 {
                     Interval highLowDtInterval = new Interval(lowDt, true, highDt, true);
 
                     // Now the Includes operation
-                    if ((Boolean)IncludesEvaluator.includes(expanded, highLowDtInterval, "day")) {
+                    if (IncludesEvaluator.includes(expanded, highLowDtInterval, "day")) {
                         results.add(res);
                     }
                     else {
@@ -278,7 +267,7 @@ public class FileBasedFhirProvider extends FhirDataProviderStu3 {
     }
 
     // If Patient context without patient id, get the first patient
-    public String getDefaultPatient(Path evalPath) {
+    private String getDefaultPatient(Path evalPath) {
         File file = new File(evalPath.toString());
         if (!file.exists()) {
             throw new IllegalArgumentException("Invalid path: " + evalPath.toString());
@@ -293,7 +282,7 @@ public class FileBasedFhirProvider extends FhirDataProviderStu3 {
     // evalPath examples -- NOTE: this occurs before filtering
     // ..../data/procedure -- all procedures for all patients (Population context)
     // ..../data/123/procedure -- all procedures for patient 123
-    public List<String> getPatientFiles(Path evalPath, String context) {
+    private List<String> getPatientFiles(Path evalPath, String context) {
         List<String> fileContents = new ArrayList<>();
         if (context.equals("Patient") || context.equals("")) {
             File file = new File(evalPath.toString());
@@ -330,7 +319,7 @@ public class FileBasedFhirProvider extends FhirDataProviderStu3 {
         return fileContents;
     }
 
-    public String readFile(File f) {
+    private String readFile(File f) {
         StringBuilder fileContent = new StringBuilder();
         // try with resources -- automatically closes files once read -- cool =)
         try (BufferedReader data = new BufferedReader(new FileReader(f))) {
@@ -345,7 +334,7 @@ public class FileBasedFhirProvider extends FhirDataProviderStu3 {
         return fileContent.toString();
     }
 
-    public boolean checkCodeMembership(Object codeObj, String vsId) {
+    private boolean checkCodeMembership(Object codeObj, String vsId) {
         FhirTerminologyProvider terminologyProvider = (FhirTerminologyProvider) this.terminologyProvider;
         ValueSetInfo valueSet = new ValueSetInfo().withId(vsId);
         ValueSet vs;
