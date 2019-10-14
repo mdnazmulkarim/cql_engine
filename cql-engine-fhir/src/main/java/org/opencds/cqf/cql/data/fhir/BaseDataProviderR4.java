@@ -4878,6 +4878,7 @@ public class BaseDataProviderR4 extends BaseFhirDataProvider {
             case "IdentifierUse": typeName = "Identifier$IdentifierUse"; break;
             case "MedicationKnowledgeStatus": typeName = "MedicationKnowledge$MedicationKnowledgeStatus"; break;
             case "medicationrequestStatus": typeName = "MedicationRequest$MedicationRequestStatus"; break;
+            case "medicationRequestStatus": typeName = "MedicationRequest$MedicationRequestStatus"; break;
             case "MedicationRequestIntent": typeName = "MedicationRequest$MedicationRequestIntent"; break;
             case "MedicationRequestPriority": typeName = "MedicationRequest$MedicationRequestPriority"; break;
             case "MedicationStatementStatus": typeName = "MedicationStatement$MedicationStatementStatus"; break;
