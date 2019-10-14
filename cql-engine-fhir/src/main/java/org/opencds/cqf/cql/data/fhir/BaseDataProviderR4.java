@@ -4772,7 +4772,8 @@ public class BaseDataProviderR4 extends BaseFhirDataProvider {
             case "Use": typeName = "Claim$Use"; break;
             case "ClaimResponseStatus": typeName = "ClaimResponse$ClaimResponseStatus"; break;
             //case "Use": typeName = "ClaimResponse$Use"; break;
-            case "RemittanceOutcome": typeName = "ClaimResponse$RemittanceOutcome"; break;
+            case "RemittanceOutcome": typeName = "Enumerations$RemittanceOutcome"; break;
+            case "ClaimProcessingCodes": typeName = "Enumerations$RemittanceOutcome"; break;
             case "ClinicalImpressionStatus": typeName = "ClinicalImpression$ClinicalImpressionStatus"; break;
             case "CodeSystemHierarchyMeaning": typeName = "CodeSystem$CodeSystemHierarchyMeaning"; break;
             case "CodeSystemContentMode": typeName = "CodeSystem$CodeSystemContentMode"; break;
@@ -4785,6 +4786,7 @@ public class BaseDataProviderR4 extends BaseFhirDataProvider {
             case "CompartmentType": typeName = "CompartmentDefinition$CompartmentType"; break;
             case "CompositionStatus": typeName = "Composition$CompositionStatus"; break;
             case "DocumentConfidentiality": typeName = "Composition$DocumentConfidentiality"; break;
+            case "vConfidentialityClassification": typeName = "Composition$DocumentConfidentiality"; break;
             case "CompositionAttestationMode": typeName = "Composition$CompositionAttestationMode"; break;
             case "DocumentRelationshipType": typeName = "Composition$DocumentRelationshipType"; break;
             case "SectionMode": typeName = "Composition$SectionMode"; break;
@@ -4794,6 +4796,7 @@ public class BaseDataProviderR4 extends BaseFhirDataProvider {
             case "ConsentDataMeaning": typeName = "Consent$ConsentDataMeaning"; break;
             case "ContractStatus": typeName = "Contract$ContractStatus"; break;
             case "ContractPublicationStatus": typeName = "Contract$ContractPublicationStatus"; break;
+            case "ContractResourcePublicationStatusCode": typeName = "Contract$ContractPublicationStatus"; break;
             case "CoverageStatus": typeName = "Coverage$CoverageStatus"; break;
             case "EligibilityRequestStatus": typeName = "CoverageEligibilityRequest$EligibilityRequestStatus"; break;
             case "EligibilityRequestPurpose": typeName = "CoverageEligibilityRequest$EligibilityRequestPurpose"; break;
@@ -4832,6 +4835,7 @@ public class BaseDataProviderR4 extends BaseFhirDataProvider {
             case "ExampleScenarioActorType": typeName = "ExampleScenario$ExampleScenarioActorType"; break;
             case "FHIRResourceType": typeName = "ExampleScenario$FHIRResourceType"; break;
             case "ExplanationOfBenefitStatus": typeName = "ExplanationOfBenefit$ExplanationOfBenefitStatus"; break;
+            case "ExpressionLanguage": typeName = "Expression$ExpressionLanguage"; break;
             //case "Use": typeName = "ExplanationOfBenefit$Use"; break;
             //case "RemittanceOutcome": typeName = "ExplanationOfBenefit$RemittanceOutcome"; break;
             case "FamilyHistoryStatus": typeName = "FamilyMemberHistory$FamilyHistoryStatus"; break;
@@ -4850,6 +4854,7 @@ public class BaseDataProviderR4 extends BaseFhirDataProvider {
             case "ImagingStudyStatus": typeName = "ImagingStudy$ImagingStudyStatus"; break;
             case "ImmunizationStatus": typeName = "Immunization$ImmunizationStatus"; break;
             case "ImmunizationEvaluationStatus": typeName = "ImmunizationEvaluation$ImmunizationEvaluationStatus"; break;
+            case "ImmunizationEvaluationStatusCodes": typeName = "ImmunizationEvaluation$ImmunizationEvaluationStatus"; break;
             case "SPDXLicense": typeName = "ImplementationGuide$SPDXLicense"; break;
             case "GuidePageGeneration": typeName = "ImplementationGuide$GuidePageGeneration"; break;
             case "GuideParameterCode": typeName = "ImplementationGuide$GuideParameterCode"; break;
@@ -4866,6 +4871,7 @@ public class BaseDataProviderR4 extends BaseFhirDataProvider {
             case "SampledDataDataType": typeName = "StringType"; break;
             case "MediaStatus": typeName = "Media$MediaStatus"; break;
             case "MedicationStatus": typeName = "Medication$MedicationStatus"; break;
+            case "MedicationStatusCodes": typeName = "Medication$MedicationStatus"; break;
             case "MedicationAdministrationStatus": typeName = "MedicationAdministration$MedicationAdministrationStatus"; break;
             case "MedicationDispenseStatus": typeName = "MedicationDispense$MedicationDispenseStatus"; break;
             case "IdentifierUse": typeName = "Identifier$IdentifierUse"; break;
@@ -4996,7 +5002,7 @@ public class BaseDataProviderR4 extends BaseFhirDataProvider {
             case "AssertionResponseTypes": typeName = "TestScript$AssertionResponseTypes"; break;
             case "NarrativeStatus": typeName = "Narrative$NarrativeStatus"; break;
             //case "FilterOperator": typeName = "ValueSet$FilterOperator"; break;
-            case "Status": typeName = "VerificationResult$Status"; break;
+            case "status": typeName = "VerificationResult$Status"; break;
             case "VisionStatus": typeName = "VisionPrescription$VisionStatus"; break;
             case "VisionEyes": typeName = "VisionPrescription$VisionEyes"; break;
             case "VisionBase": typeName = "VisionPrescription$VisionBase"; break;
