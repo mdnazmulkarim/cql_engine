@@ -4715,6 +4715,7 @@ public class BaseDataProviderR4 extends BaseFhirDataProvider {
             case "markdown": typeName = "MarkdownType"; break;
             case "time": typeName = "TimeType"; break;
             case "uri": typeName = "UriType"; break;
+            case "url": typeName = "UrlType"; break;
             case "uuid": typeName = "UuidType"; break;
             case "id": typeName = "IdType"; break;
             case "oid": typeName = "OidType"; break;
