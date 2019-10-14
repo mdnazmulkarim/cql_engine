@@ -4861,8 +4861,8 @@ public class BaseDataProviderR4 extends BaseFhirDataProvider {
             case "InvoiceStatus": typeName = "Invoice$InvoiceStatus"; break;
             case "InvoicePriceComponentType": typeName = "Invoice$InvoicePriceComponentType"; break;
             case "LinkageType": typeName = "Linkage$LinkageType"; break;
-            case "ListStatus": typeName = "List$ListStatus"; break;
-            case "ListMode": typeName = "List$ListMode"; break;
+            case "ListStatus": typeName = "ListResource$ListStatus"; break;
+            case "ListMode": typeName = "ListResource$ListMode"; break;
             case "LocationStatus": typeName = "Location$LocationStatus"; break;
             case "LocationMode": typeName = "Location$LocationMode"; break;
             //case "DaysOfWeek": typeName = "Location$DaysOfWeek"; break;
