@@ -4801,6 +4801,7 @@ public class BaseDataProviderR4 extends BaseFhirDataProvider {
             case "ContractStatus": typeName = "Contract$ContractStatus"; break;
             case "ContractPublicationStatus": typeName = "Contract$ContractPublicationStatus"; break;
             case "ContractResourcePublicationStatusCode": typeName = "Contract$ContractPublicationStatus"; break;
+            case "ContractResourcePublicationStatusCodes": typeName = "Contract$ContractPublicationStatus"; break;
             case "CoverageStatus": typeName = "Coverage$CoverageStatus"; break;
             case "EligibilityRequestStatus": typeName = "CoverageEligibilityRequest$EligibilityRequestStatus"; break;
             case "EligibilityRequestPurpose": typeName = "CoverageEligibilityRequest$EligibilityRequestPurpose"; break;
