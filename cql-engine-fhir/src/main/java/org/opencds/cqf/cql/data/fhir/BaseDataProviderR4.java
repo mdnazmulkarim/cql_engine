@@ -4771,6 +4771,9 @@ public class BaseDataProviderR4 extends BaseFhirDataProvider {
             case "ChargeItemDefinitionPriceComponentType": typeName = "ChargeItemDefinition$ChargeItemDefinitionPriceComponentType"; break;
             case "ClaimStatus": typeName = "Claim$ClaimStatus"; break;
             case "Use": typeName = "Claim$Use"; break;
+            // TODO: need these Use mappings, but only Claim is accounted for
+//            case "Use": typeName = "ExplanationOfBenefit$Use"; break;
+//            case "Use": typeName = "ClaimResponse$Use"; break;
             case "ClaimResponseStatus": typeName = "ClaimResponse$ClaimResponseStatus"; break;
             //case "Use": typeName = "ClaimResponse$Use"; break;
             case "RemittanceOutcome": typeName = "Enumerations$RemittanceOutcome"; break;
@@ -5008,6 +5011,7 @@ public class BaseDataProviderR4 extends BaseFhirDataProvider {
             case "VisionStatus": typeName = "VisionPrescription$VisionStatus"; break;
             case "VisionEyes": typeName = "VisionPrescription$VisionEyes"; break;
             case "VisionBase": typeName = "VisionPrescription$VisionBase"; break;
+            case "SearchParamType": typeName = "Enumerations$SearchParamType"; break;
             case "FHIRDefinedType": typeName = "Enumerations$FHIRDefinedType"; break;
             case "FHIRAllTypes": typeName = "Enumerations$FHIRAllTypes"; break;
             case "FHIRVersion": typeName = "Enumerations$FHIRVersion"; break;
