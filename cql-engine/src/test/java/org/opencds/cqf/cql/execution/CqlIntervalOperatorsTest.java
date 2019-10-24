@@ -1,16 +1,23 @@
 package org.opencds.cqf.cql.execution;
 
-import org.opencds.cqf.cql.elm.execution.EquivalentEvaluator;
-import org.opencds.cqf.cql.runtime.*;
-import org.testng.Assert;
-import org.testng.annotations.Test;
-
-import java.math.BigDecimal;
-import java.util.List;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
+
+import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.List;
+
+import org.opencds.cqf.cql.elm.execution.CollapseEvaluator;
+import org.opencds.cqf.cql.elm.execution.EquivalentEvaluator;
+import org.opencds.cqf.cql.runtime.Date;
+import org.opencds.cqf.cql.runtime.DateTime;
+import org.opencds.cqf.cql.runtime.Interval;
+import org.opencds.cqf.cql.runtime.Quantity;
+import org.opencds.cqf.cql.runtime.TemporalHelper;
+import org.opencds.cqf.cql.runtime.Time;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
 public class CqlIntervalOperatorsTest extends CqlExecutionTestBase {
 
@@ -196,7 +203,8 @@ public class CqlIntervalOperatorsTest extends CqlExecutionTestBase {
         Assert.assertTrue(((Interval)((List) result).get(1)).equal(new Interval(new BigDecimal("12.0"), true, new BigDecimal("19.0"), true)));
 
         result = context.resolveExpressionRef("DecimalIntervalCollapse2").getExpression().evaluate(context);
-        Assert.assertTrue(((Interval)((List) result).get(0)).equal(new Interval(new BigDecimal("4.0"), true, new BigDecimal("8.0"), true)));
+        Assert.assertTrue(((Interval)((List) result).get(0)).equal(new Interval(new BigDecimal("4.0"), true, new BigDecimal("6.0"), true)));
+        Assert.assertTrue(((Interval)((List) result).get(1)).equal(new Interval(new BigDecimal("6.1"), true, new BigDecimal("8.0"), true)));
 
         result = context.resolveExpressionRef("QuantityIntervalCollapse").getExpression().evaluate(context);
         Assert.assertTrue(((Interval)((List) result).get(0)).equal(new Interval(new Quantity().withValue(new BigDecimal("1.0")).withUnit("g"), true, new Quantity().withValue(new BigDecimal("10.0")).withUnit("g"), true)));
@@ -227,6 +235,54 @@ public class CqlIntervalOperatorsTest extends CqlExecutionTestBase {
         Assert.assertTrue(EquivalentEvaluator.equivalent(((Interval)((List)result).get(0)).getEnd(), new Time(offset, 15, 59, 59, 999)));
         assertThat(((List)result).size(), is(1));
     }
+
+
+    @Test
+    public void TestCollapseJavaDate() {
+        Interval first = new Interval(new Date(2018, 1, 1), true, new Date(2018, 8, 28), true);
+        Interval second = new Interval(new Date(2018, 8, 30), true, new Date(2018, 10, 15), true);
+
+        List<Interval> intervals = Arrays.asList(first, second);
+
+        List<Interval> result = CollapseEvaluator.collapse(intervals, null);
+        assertThat(((List)result).size(), is(2));
+    }
+
+    @Test
+    public void TestCollapseJavaDatePerMultipleDays() {
+        Interval first = new Interval(new Date(2012, 1, 1), true, new Date(2012, 1, 6), true);
+        Interval second = new Interval(new Date(2012, 1, 10), true, new Date(2012, 1, 15), true);
+
+        List<Interval> intervals = Arrays.asList(first, second);
+
+        List<Interval> result = CollapseEvaluator.collapse(intervals, new Quantity().withUnit("day").withValue(new BigDecimal("4")));
+        assertThat(((List)result).size(), is(1));
+        //Assert.assertTrue(((Interval)((List) result).get(0)).equal(new Interval(1, true, 4, true)));
+    }
+
+    @Test
+    public void TestCollapseJavaIntPerMultiple() {
+        Interval first = new Interval(1, true, 6, true);
+        Interval second = new Interval(10, true, 15, true);
+
+        List<Interval> intervals = Arrays.asList(first, second);
+
+        List<Interval> result = CollapseEvaluator.collapse(intervals, new Quantity().withValue(new BigDecimal("4")));
+        assertThat(((List)result).size(), is(1));
+        Assert.assertTrue(((Interval)((List) result).get(0)).equal(new Interval(1, true, 4, true)));
+    }
+
+    @Test
+    public void TestCollapseInt() {
+        Interval first = new Interval(3, true, 5, true);
+        Interval second = new Interval(8, true, 10, true);
+
+        List<Interval> intervals = Arrays.asList(first, second);
+        List<Interval> result = CollapseEvaluator.collapse(intervals, new Quantity().withValue(new BigDecimal("3")));
+        assertThat(((List)result).size(), is(0));
+    }
+
+
 
     /**
      * {@link org.opencds.cqf.cql.elm.execution.ContainsEvaluator#evaluate(Context)}

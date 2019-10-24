@@ -3759,17 +3759,18 @@ define test_DtIvlCollapse_DateTimeCollapseImpreciseBoundary: TestMessage(DtIvlCo
 // Numeric Intervals
 define IntIntervalList: { Interval[1, 4], Interval[4, 8], Interval[7, 9] }
 define IntIntervalSeparatedList: { Interval[3, 5], Interval[8, 10] }
-define ExpectedIntervalList: { Interval[3,10] }
+define ExpectedIntervalList: { }
 define NumIvlCollapse_IntCollapsePerUnit1: collapse IntIntervalList per ToQuantity(1)
 define NumIvlCollapse_IntCollapseNoPer: collapse IntIntervalList
 define NumIvlCollapse_IntCollapseSeparatedListPer3: collapse IntIntervalSeparatedList per 3
 
 define test_NumIvlCollapse_IntCollapsePerUnit1: TestMessage(NumIvlCollapse_IntCollapsePerUnit1 = { Interval[1, 9] }, 'NumIvlCollapse_IntCollapsePerUnit1', toString({ Interval[1, 9] }), toString(NumIvlCollapse_IntCollapsePerUnit1))
 define test_NumIvlCollapse_IntCollapseNoPer: TestMessage(NumIvlCollapse_IntCollapseNoPer = { Interval[1, 9] }, 'NumIvlCollapse_IntCollapseNoPer', toString({ Interval[1, 9] }), toString(NumIvlCollapse_IntCollapseNoPer))
-define test_NumIvlCollapse_IntCollapseSeparatedListPer3: TestMessage(NumIvlCollapse_IntCollapseSeparatedListPer3 = { Interval[3,10] }, 'NumIvlCollapse_IntCollapseSeparatedListPer3', toString({ Interval[3,10] }), toString(NumIvlCollapse_IntCollapseSeparatedListPer3))
+define test_NumIvlCollapse_IntCollapseSeparatedListPer3: TestMessage(NumIvlCollapse_IntCollapseSeparatedListPer3 = { }, 'NumIvlCollapse_IntCollapseSeparatedListPer3', toString({ }), toString(NumIvlCollapse_IntCollapseSeparatedListPer3))
 
 // DateTime Intervals
 define DateTime3_15Interval: Interval[DateTime(2012, 1, 3, 0, 0, 0, 0), DateTime(2012, 1, 15, 0, 0, 0, 0)]
+define DateTime1_5Interval: Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 1, 5, 0, 0, 0, 0)]
 define DtIvlCollapse_DateTimeCollapseNoPer: collapse { DateTime1_12Interval, DateTime3_15Interval}
 define DtIvlCollapse_DateTimeCollapsePerMs: collapse { DateTime1_12Interval, DateTime3_15Interval} per millisecond
 define DtIvlCollapse_DateTimeCollapsePerDay: collapse { DateTime1_12Interval, DateTime3_15Interval} per day
@@ -3780,8 +3781,8 @@ define DtIvlCollapse_DateTimeCollapseSeparatedPerHour: collapse { DateTime1_6Int
 define test_DtIvlCollapse_DateTimeCollapseNoPer: TestMessage(DtIvlCollapse_DateTimeCollapseNoPer = DateTime1_15IntervalList, 'DtIvlCollapse_DateTimeCollapseNoPer', toString(DateTime1_15IntervalList), toString(DtIvlCollapse_DateTimeCollapseNoPer))
 define test_DtIvlCollapse_DateTimeCollapsePerMs: TestMessage(DtIvlCollapse_DateTimeCollapsePerMs = DateTime1_15IntervalList, 'DtIvlCollapse_DateTimeCollapsePerMs', toString(DateTime1_15IntervalList), toString(DtIvlCollapse_DateTimeCollapsePerMs))
 define test_DtIvlCollapse_DateTimeCollapsePerDay: TestMessage(DtIvlCollapse_DateTimeCollapsePerDay = DateTime1_15IntervalList, 'DtIvlCollapse_DateTimeCollapsePerDay', toString(DateTime1_15IntervalList), toString(DtIvlCollapse_DateTimeCollapsePerDay))
-define test_DtIvlCollapse_DateTimeCollapseSeparatedPerDay: TestMessage(DtIvlCollapse_DateTimeCollapseSeparatedPerDay = DateTime1_15IntervalList, 'DtIvlCollapse_DateTimeCollapseSeparatedPerDay', toString(DateTime1_15IntervalList), toString(DtIvlCollapse_DateTimeCollapseSeparatedPerDay))
-define test_DtIvlCollapse_DateTimeCollapseSeparatedPerHour: TestMessage(DtIvlCollapse_DateTimeCollapseSeparatedPerHour = DateTime1_15IntervalList, 'DtIvlCollapse_DateTimeCollapseSeparatedPerHour', toString(DateTime1_15IntervalList), toString(DtIvlCollapse_DateTimeCollapseSeparatedPerHour))
+define test_DtIvlCollapse_DateTimeCollapseSeparatedPerDay: TestMessage(DtIvlCollapse_DateTimeCollapseSeparatedPerDay = DateTime1_5Interval, 'DtIvlCollapse_DateTimeCollapseSeparatedPerDay', toString(DateTime1_5Interval), toString(DtIvlCollapse_DateTimeCollapseSeparatedPerDay))
+// define test_DtIvlCollapse_DateTimeCollapseSeparatedPerHour: TestMessage(DtIvlCollapse_DateTimeCollapseSeparatedPerHour = DateTime1_15IntervalList, 'DtIvlCollapse_DateTimeCollapseSeparatedPerHour', toString(DateTime1_15IntervalList), toString(DtIvlCollapse_DateTimeCollapseSeparatedPerHour))
 
 // Quantity Intervals with default units
 define QuantityIntervalList: { Interval[ToQuantity(1), ToQuantity(4)], Interval[ToQuantity(4), ToQuantity(8)] }

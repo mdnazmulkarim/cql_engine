@@ -3,6 +3,7 @@ package org.opencds.cqf.cql.elm.execution;
 import org.opencds.cqf.cql.exception.InvalidOperatorArgument;
 import org.opencds.cqf.cql.execution.Context;
 import org.opencds.cqf.cql.runtime.Interval;
+import org.opencds.cqf.cql.runtime.Quantity;
 
 import java.math.BigDecimal;
 
@@ -29,7 +30,16 @@ public class TruncatedDivideEvaluator extends org.cqframework.cql.elm.execution.
 
             return (Integer)left / (Integer)right;
         }
+        // TODO: This assumes both are using the same unit
+        else if (left instanceof Quantity && right instanceof BigDecimal) {
+            if (EqualEvaluator.equal(right, new BigDecimal("0.0"))) {
+                return null;
+            }
 
+            Quantity quantity = (Quantity)left;
+
+            return new Quantity().withUnit(quantity.getUnit()).withValue(quantity.getValue().divideAndRemainder((BigDecimal)right)[0]);
+        }
         else if (left instanceof BigDecimal) {
             if (EqualEvaluator.equal(right, new BigDecimal("0.0"))) {
                 return null;
