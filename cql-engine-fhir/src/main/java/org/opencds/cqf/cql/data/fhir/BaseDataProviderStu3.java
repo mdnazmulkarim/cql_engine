@@ -115,8 +115,8 @@ public class BaseDataProviderStu3 extends BaseFhirDataProvider {
         else if (source instanceof IdType) {
             return ((IdType) source).getIdPart();
         }
-        else if (source instanceof UriType) {
-            return ((UriType) source).getValue();
+        else if (result instanceof UriType) {
+            return ((UriType) result).getValue();
         }
         else {
             return result;
